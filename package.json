@@ -1,5 +1,5 @@
 {
-  "name": "autos",
+  "name": "personal_website",
   "version": "1.0.0",
   "description": "This application will show the latest car news.",
   "main": "server.js",
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/n/a.git"
+    "url": "http://github.com/brobusf21/personal_website.git/"
   },
   "keywords": [
     "n/a"
@@ -32,6 +32,9 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/n/a/issues"
+  },
+  "engines": {
+    "node": "6.7.0"
   },
   "homepage": "https://github.com/n/a#readme"
 }
