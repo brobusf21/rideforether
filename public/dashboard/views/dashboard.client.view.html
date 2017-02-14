@@ -1,0 +1,24 @@
+<link rel="stylesheet" type="text/css" href="/css/dashboard.css">
+
+<div class="row title" align="center">
+	<h3>Dashboard</h3>
+</div>
+<div class="row">
+	<h4>Progress Until Next Donation</h4>
+	<div class="progress">
+        <uib-progressbar class="progress-striped active" max="50" value="25"><i>25 / 50</i></uib-progressbar><
+	</div>
+</div>
+<div class="row recent-activty">
+	<h4>Tracked Activity</h4>
+	<span data-ng-bind="authentication.user._id"></span>
+		<!-- The list of activities -->
+<!-- 		<li data-ng-repeat="activity in recentActivities"> -->
+<!-- 			<a data-ng-href="#!/articles/{{article._id}}" data-ng-bind="article.title"></a>
+			<br>
+			<small data-ng-bind="article.created | date:'medium'"></small>
+			<small>/</small>
+			<small data-ng-bind="article.creator.fullName"></small>
+			<p data-ng-bind="article.content"></p> -->
+<!-- 		</li> -->
+</div>

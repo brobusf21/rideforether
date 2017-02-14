@@ -2,10 +2,10 @@
 'use strict';
 
 // Set the main application name
-var mainApplicationModuleName = 'blog';
+var mainApplicationModuleName = 'rideforether';
 
 // Create the main application
-var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngRoute', 'index', 'articles']);
+var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngResource', 'ngAnimate', 'ngRoute', 'users', 'index', 'dashboard']);
 
 // Configure the hashbang URLs using the $locationProvider services 
 mainApplicationModule.config(['$locationProvider',

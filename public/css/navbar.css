@@ -1,0 +1,14 @@
+<style>
+   /* Remove the navbar's default margin-bottom and rounded borders */
+  .navbar {
+  }
+  
+  #logo {
+      color: #fc4c02;
+      font-family: "Trebuchet MS", Helvetica, sans-serif;
+    }
+
+  #signed-in {
+    color: #fc4c02;
+  }
+</style>

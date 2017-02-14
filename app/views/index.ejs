@@ -5,66 +5,39 @@
 <body>
 	<!-- Render AngularJS views  -->
 	<section ng-view></section>
+
+	<!-- Render the user object -->
+	<script type="text/javascript">
+		window.user = <%- user || 'null' %>;
+		console.log(window.user);
+	</script>
+	
+	<!-- Load local js libraries -->
 	<script type="text/javascript" src="/lib/angular/angular.js"></script>
 	<script type="text/javascript" src="/lib/angular-route/angular-route.js"></script>
+	<script type="text/javascript" src="/lib/angular-resource/angular-resource.min.js"></script>
 	<script type="text/javascript" src="/lib/angular-bootstrap/ui-bootstrap.js"></script>
 	<script type="text/javascript" src="/lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+	<script type="text/javascript" src="/lib/angular-animate/angular-animate.min.js"></script>
+	<script type="text/javascript" src="/lib/angular-touch/angular-touch.min.js"></script>
 
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<!-- 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
-	<!-- <script type="text/javascript" src="../config/strategies/facebook-connection.js"></script> -->
 
 	<!-- Load the index module -->
 	<script type="text/javascript" src="/index/index.client.module.js"></script>
 	<script type="text/javascript" src="/index/controllers/index.client.controller.js"></script>
 	<script type="text/javascript" src="/index/config/index.client.routes.js"></script>
 
-	<!-- Load the articles module -->
-	<script type="text/javascript" src="/articles/articles.client.module.js"></script>
-	<script type="text/javascript" src="/articles/controllers/articles.client.controller.js"></script>
-	<script type="text/javascript" src="/articles/services/articles.client.service.js"></script>
-	<script type="text/javascript" src="/articles/config/articles.client.routes.js"></script>
+	<!-- Load the users module -->
+	<script type="text/javascript" src="/users/users.client.module.js"></script>
+	<script type="text/javascript" src="/users/services/authentication.client.service.js"></script>
 
-	<script type="text/javascript">
-	  window.fbAsyncInit = function() {
-	    FB.init({
-	      appId      : '1326149244063754',
-	      xfbml      : true,
-	      version    : 'v2.7'
-	    });
-	  };
-
-	  (function(d, s, id){
-	     var js, fjs = d.getElementsByTagName(s)[0];
-	     if (d.getElementById(id)) {return;}
-	     js = d.createElement(s); js.id = id;
-	     js.src = "//connect.facebook.net/en_US/sdk.js";
-	     fjs.parentNode.insertBefore(js, fjs);
-	   }(document, 'script', 'facebook-jssdk'));
-	   </script>
-
-	<div
-	  class="fb-like"
-	  data-share="true"
-	  data-width="450"
-	  data-show-faces="true">
-	</div>
-
-	<!-- Load Groundwork CSS and JS -->
-	<!-- Modernizr -->
-<!-- 	<script src="/js/libs/modernizr-2.6.2.min.js"></script> -->
-	<!-- framework css -->
-	<!--[if gt IE 9]><!-->
-<!-- 	<link type="text/css" rel="stylesheet" href="/css/groundwork.css"> -->
-	<!--<![endif]-->
-	<!--[if lte IE 9]>
-	<link type="text/css" rel="stylesheet" href="/css/groundwork-core.css">
-	<link type="text/css" rel="stylesheet" href="/css/groundwork-type.css">
-	<link type="text/css" rel="stylesheet" href="/css/groundwork-ui.css">
-	<link type="text/css" rel="stylesheet" href="/css/groundwork-anim.css">
-	<link type="text/css" rel="stylesheet" href="/css/groundwork-ie.css">
-	<![endif]-->
+	<!-- Load the dashboard module -->
+	<script type="text/javascript" src="/dashboard/dashboard.client.module.js"></script>
+	<script type="text/javascript" src="/dashboard/controllers/dashboard.client.controller.js"></script>
+	<script type="text/javascript" src="/dashboard/services/dashboard.client.service.js"></script>
+	<script type="text/javascript" src="/dashboard/config/dashboard.client.routes.js"></script>
 	
 	<!-- Bootstrap AngularJS application -->
 	<script type="text/javascript" src="/application.js"></script>

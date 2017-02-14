@@ -1,20 +1,55 @@
-<link rel="stylesheet" type="text/css" href="/css/index.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Ride for Ether - Charity</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+	<nav ng-include="'/html_modules/navbar.html'" ng-controller="IndexController"></nav>
 
-<div class="wrapper">
-	<div class="row">
-		<div class="col-md-12">
-			<!-- Render the OAuth authentication links  -->
-			<a href="/oauth/facebook">Sign Up Using Facebook</a>
+	<div class="container-fluid" ng-controller="IndexController">
+		<div class="row title-container"> <!-- Orange -->
+			<div class="col-md-12" align="center">
+				<h1>Use Strava to Donate Ether</h1>
+				<h5>Every 10 miles you ride, Ether Rides will donate 0.005 ether to a charity of your choice.</h5>
+			</div>
+		</div>
+		<div class="row connect-strava"> <!-- Connect to Strava button -->
+			<div data-ng-show="!authentication.user">
+				<div class="col-md-12" align="center">
+					<a href="/oauth/strava"><img src="/img/strava_btn_1.png"></a>
+					<li><a href="/logout">Logout</a></li>
+				</div>
+			</div>
+			<div data-ng-show="authentication.user">
+				<div class="col-md-12" align="center">
+					<h1>Hello <span data-ng-bind="authentication.user.firstName"></span>!</h1>
+				</div>
+			</div>
+		</div>
+
+		<div class="row dashboard-container" data-ng-show="authentication.user">
+			<div class="col-md-2"></div>
+			<div class="col-md-8" ng-include="'/dashboard/views/dashboard.client.view.html'" ng-controller="DashboardController"></div>
+			<div class="col-md-2"></div>
+		</div>
+
+		<div class="row more-info-container"> <!-- Orange -->
+			<div class="col-md-4 more-info-blk">
+				<div class="row" align="center" style="height: 200px"> <!-- Black -->
+					<h3>How Does It Work?</h3>
+				</div>
+			</div>
+			<div class="col-md-4 more-info-blk" align="center" style="height: 200px">
+				<h3>Most Popular Charities</h3>
+			</div>
+			<div class="col-md-4 more-info-blk" align="center" style="height: 200px">
+				<h3>Top 10 Donors</h3>
+			</div>
 		</div>
 	</div>
-</div>
-<div class="row">
-	<div class="col-md-12">
-		<ul>
-			<li>Home</li>
-			<li>Blog</li>
-			<li>Projects</li>
-			<li>Resume</li>
-		</ul>
-	</div>
-</div>
+
+</body>
+</html>

@@ -3,38 +3,49 @@
 
 // Load the module dependencies
 var passport = require('passport'),
-	User = require('mongoose').model('User');
+	User = require('mongoose').model('User'),
+	request = require('request'),
+	moment = require('moment'),
+	config = require('../../config/config'),
+	strava = require('./strava.server.controller');
 
-// Create a new error handling controller method
-var getErrorMessage = function(err) {
-	// Define the error message variable
-	var message = '';
 
-	// If an internal MongoDB error occurs get the error message
-	if (err.code) {
-		switch (err.code) {
-			// If a unique index error occurs set the message error
-			case 11000:
-			case 11001:
-				message = 'Username already exists';
-				break;
-			// If a general error occurs set the message error
-			default:
-				message = 'Something went wrong';
+
+exports.updateTrackedActivityList = function(profile, stravaActivities) {
+	console.log('users.server.controller.js: updateTrackedActivityList');
+	User.findOne({providerId: profile.providerId}, function(err, user) {
+		if (err) {
+			console.log(err);
+		} else {
+			//console.log('user: ' + user);
+			var i = 0;
+			while (moment(stravaActivities[i].start_date) > moment(user.created)) {
+				if (!loggedActivities.includes(stravaActivities[i])) {
+					// Need to calculate ether and save that as well
+					user.loggedActivities.push(stravaActivities[i]);
+				}
+				i++;
+			}
+			user.save(function(err) {
+				// Continue to the next middleware
+				return;
+			});
 		}
-	} else {
-		// Grab the first error message from a list of possible errors
-		for (var errName in err.errors) {
-			if (err.errors[errName].message) message = err.errors[errName].message;
-		}
-	}
+	});
+};
 
-	// Return the message error
-	return message;
+
+exports.getLoggedActivities = function() {
+	console.log('getLoggedActivities');
+};
+
+exports.getAccessToken = function(req, res, next, id) {
+	console.log('getAccessToken: ' + id);
 };
 
 // Create a new controller method that creates new 'OAuth' users
-exports.saveOAuthUserProfile = function(req, profile, done) {
+exports.saveOAuthUserProfile = function(profile, accessToken, done) {
+	console.log('users.server.controller.js: saveOAuthUserProfile');
 	// Try finding a user document that was registered using the current OAuth provider
 	User.findOne({
 		provider: profile.provider,
@@ -46,6 +57,7 @@ exports.saveOAuthUserProfile = function(req, profile, done) {
 		} else {
 			// If a user could not be found, create a new user, otherwise, continue to the next middleware
 			if (!user) {
+				console.log('New user!');
 				// Set a possible base username
 				var possibleUsername = profile.username || ((profile.email) ? profile.email.split('@')[0] : '');
 
@@ -53,7 +65,7 @@ exports.saveOAuthUserProfile = function(req, profile, done) {
 				User.findUniqueUsername(possibleUsername, null, function(availableUsername) {
 					// Set the available user name 
 					profile.username = availableUsername;
-					
+
 					// Create the user
 					user = new User(profile);
 
@@ -62,9 +74,22 @@ exports.saveOAuthUserProfile = function(req, profile, done) {
 						// Continue to the next middleware
 						return done(err, user);
 					});
+					// var promise = user.save();
+					// promise.then(function(err) {
+					// 	// Continue to the next middleware
+					// 	console.log('err: ' + err);
+					// 	return done(err, user);
+					// });
+					//console.log('No save');
+					//return done(err, user);
 				});
 			} else {
+				// User has already signed up and has been here before
 				// Continue to the next middleware
+				console.log('User already added! Generate ether!');
+
+				strava.trackActivities(profile, accessToken);
+
 				return done(err, user);
 			}
 		}
@@ -72,10 +97,21 @@ exports.saveOAuthUserProfile = function(req, profile, done) {
 };
 
 // Create a new controller method for signing out
-exports.signout = function(req, res) {
+exports.logout = function(req, res) {
 	// Use the Passport 'logout' method to logout
 	req.logout();
+	req.session.destroy(function (err) {
+		console.log('Error logout(): ' + err);
+	});
 
 	// Redirect the user back to the main application page
 	res.redirect('/');
 };
+
+
+// Render the error_message page 
+exports.failureRender = function(req, res) {
+	console.log('failureRedirect!');
+	//res.redirect('/failureRedirect');
+	res.render('error_message');
+}; 

@@ -33,7 +33,7 @@ module.exports = function(db) {
         mongooseConnection: db.connection
     });
 
-	// Configure the 'session' middleware
+	//Configure the 'session' middleware
 	app.use(session({
 		saveUninitialized: true,
 		resave: true,
@@ -55,6 +55,7 @@ module.exports = function(db) {
 	/* Load the routing files */
 	require('../app/routes/index.server.routes.js')(app);
 	require('../app/routes/users.server.routes.js')(app);
+	require('../app/routes/strava.server.routes.js')(app);
 	
 	/* Configure static file serving */
 	app.use(express.static('./public'));

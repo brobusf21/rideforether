@@ -26,4 +26,5 @@ module.exports = function() {
 
 	// Load Passport's strategies configuration files
 	require('./strategies/facebook.js')();
+	require('./strategies/strava.js')();
 };

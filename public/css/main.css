@@ -1,0 +1,51 @@
+<style>
+	
+	body {
+
+	}
+
+	.title-container {
+		background-color: #fc4c02;
+	}
+	.title-container h1 {
+		color: white;
+	}
+	.title-container h5 {
+		color: white;
+		font-size: px;
+	}
+
+	.connect-strava {
+		padding: 100px;
+		background-image: url("/img/cycling_index.jpg");
+		background-repeat: no-repeat; 
+		background-size: cover;
+		background-position: center;
+	}
+
+	.connect-strava h1 {
+		color: white;
+	}
+
+	.dashboard-container {
+		background-color: gray;
+	}
+
+	.more-info-container {
+		
+	}
+
+	.more-info-blk {
+		background-color: black;
+		color: white;
+	}
+
+	.more-info-org {
+		background-color: #fc4c02;
+		color: black;
+	}
+
+
+
+
+</style>

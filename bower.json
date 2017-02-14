@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "dependencies": {
     "angular": "^1.5.5",
-    "angular-route": "^1.5.5"
+    "angular-route": "^1.5.5",
+    "angular-animate": "^1.6.2",
+    "angular-touch": "^1.6.2",
+    "angular-resource": "^1.6.2"
   },
   "description": "This app is designed to bring the latest car news to users.",
   "main": "server.js",
